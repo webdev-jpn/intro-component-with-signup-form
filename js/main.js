@@ -38,4 +38,6 @@ form.addEventListener("submit", (e) => {
   if (!isFormValid) {
     return; // Stop
   }
+
+  alert("Success! Your free trial request has been sent.");
 });
