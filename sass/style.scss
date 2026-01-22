@@ -1,0 +1,266 @@
+// Breakpoints
+$breakpoints: (
+  mobile: 375px,
+  tablet: 768px,
+  desktop: 1440px,
+);
+
+// Mixin
+@mixin mq($device) {
+  @media (min-width: map-get($breakpoints, $device)) {
+    @content;
+  }
+}
+
+// Function to convert px to rem
+@function rem($px) {
+  @return ($px / $font-size-base) * 1rem;
+}
+
+// Color
+$white: #fff;
+$black: #000;
+$gray200: #dedede;
+$gray900: #3d3b48;
+$purple350: #bab7d4;
+$purple400: #a6a1cf;
+$purple700: #5e54a4;
+$green300: #77e2b3;
+$green400: #38cc8b;
+$green-btn-shadow: #01b801;
+$red400: #ff7979;
+
+// Typography
+$font-size-base: 16; // px
+$font-weight-regular: 400;
+$line-height-base: 1.73;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-family: "Poppins", sans-serif;
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.u-mobile-only {
+  display: block; // new line
+
+  @include mq(tablet) {
+    display: none;
+  }
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: rem(16);
+  line-height: $line-height-base;
+  font-weight: $font-weight-regular;
+  font-family: $font-family;
+  color: $white;
+
+  background-color: $red400;
+  background-image: url(/images/bg-intro-mobile.png);
+  background-position: top center;
+  background-size: auto;
+
+  @include mq(desktop) {
+    background-image: url(/images/bg-intro-desktop.png);
+  }
+}
+
+main {
+  padding: rem(88) rem(24) rem(68);
+  min-height: 100vh;
+  max-width: rem(540);
+  width: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: rem(64);
+
+  @include mq(desktop) {
+    padding: 0;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: rem(48);
+    max-width: rem(1113);
+  }
+}
+
+.text {
+  @include mq(desktop) {
+    max-width: rem(525);
+    width: 100%;
+  }
+}
+
+.text__title {
+  font-size: rem(28);
+  line-height: 1.3;
+  font-weight: $font-weight-bold;
+  text-align: center;
+
+  @include mq(tablet) {
+    font-size: rem(50);
+    line-height: 1.1;
+    letter-spacing: rem(-0.5);
+  }
+
+  @include mq(desktop) {
+    text-align: left;
+  }
+}
+
+.text__subtitle {
+  margin-top: rem(16);
+  line-height: 1.65;
+  font-weight: $font-weight-medium;
+  text-align: center;
+
+  @include mq(desktop) {
+    text-align: left;
+  }
+}
+
+.contact {
+  @include mq(desktop) {
+    max-width: rem(540);
+    width: 100%;
+  }
+}
+
+.contact__copy {
+  background-color: $purple700;
+  padding: rem(18);
+  font-size: rem(15);
+  line-height: 1.75;
+  letter-spacing: rem(0.27);
+  text-align: center;
+  border-radius: rem(10);
+  box-shadow: 0px 5px rgb(94, 84, 164, 0.5);
+
+  span {
+    font-weight: $font-weight-bold;
+  }
+}
+
+.registration-form {
+  background-color: $white;
+  border-radius: rem(10);
+  padding: rem(24);
+  margin-top: rem(24);
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: rem(8);
+
+  .error-icon,
+  .error-message {
+    display: none;
+  }
+
+  @include mq(tablet) {
+    margin-bottom: rem(24);
+  }
+
+  input {
+    padding: rem(16) rem(24);
+    border: 1px solid $gray200;
+    border-radius: rem(5);
+    width: 100%;
+    color: $gray900;
+    font-size: rem(15);
+    line-height: 1.75;
+    letter-spacing: rem(0.25);
+    margin-bottom: rem(4);
+
+    &:focus {
+      outline: 2px solid $red400;
+      outline-offset: -2px;
+    }
+
+    @include mq(tablet) {
+      margin-bottom: rem(8);
+    }
+  }
+
+  &.error {
+    input {
+      border: 2px solid $red400;
+      color: $red400;
+
+      &::placeholder {
+        color: $red400;
+      }
+    }
+
+    .error-icon,
+    .error-message {
+      display: block;
+    }
+  }
+}
+
+.error-icon {
+  position: absolute;
+  top: rem(16);
+  right: rem(16);
+
+  @include mq(tablet) {
+    right: rem(32);
+  }
+}
+
+.error-message {
+  color: $red400;
+  font-size: rem(11);
+  font-weight: $font-weight-medium;
+  line-height: 1.55;
+  font-style: italic;
+  text-align: right;
+}
+
+.submit {
+  width: 100%;
+  padding: rem(16) rem(32);
+  background-color: $green400;
+  color: $white;
+  font-size: rem(15);
+  letter-spacing: rem(1);
+  font-weight: $font-weight-semibold;
+  border-radius: rem(5);
+  box-shadow: 0px 5px $green-btn-shadow;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: lighten($green400, 10%);
+  }
+}
+
+.contact__terms {
+  margin-top: rem(8);
+  color: $purple350;
+  line-height: 1.9;
+  font-size: rem(11);
+  font-weight: $font-weight-medium;
+  text-align: center;
+
+  a {
+    color: $red400;
+    font-weight: $font-weight-bold;
+  }
+}
