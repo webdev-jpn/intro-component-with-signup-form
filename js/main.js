@@ -15,6 +15,8 @@ inputs.forEach((input) => {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
+  let isFormValid = true;
+
   inputs.forEach((input) => {
     const value = input.value.trim();
     let isError = false;
@@ -27,8 +29,13 @@ form.addEventListener("submit", (e) => {
 
     if (isError) {
       input.parentElement.classList.add("error");
+      isFormValid = false;
     } else {
       input.parentElement.classList.remove("error");
     }
   });
+
+  if (!isFormValid) {
+    return; // Stop
+  }
 });
