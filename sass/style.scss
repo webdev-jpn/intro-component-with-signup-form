@@ -51,11 +51,11 @@ $font-family: "Poppins", sans-serif;
   border-width: 0;
 }
 
-.u-mobile-only {
-  display: block; // new line
+.pricing-info {
+  display: block;
 
   @include mq(tablet) {
-    display: none;
+    display: inline;
   }
 }
 

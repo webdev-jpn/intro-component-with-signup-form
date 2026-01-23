@@ -10,12 +10,12 @@
   border-width: 0;
 }
 
-.u-mobile-only {
+.pricing-info {
   display: block;
 }
 @media (min-width: 768px) {
-  .u-mobile-only {
-    display: none;
+  .pricing-info {
+    display: inline;
   }
 }
 
